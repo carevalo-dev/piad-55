@@ -11,7 +11,7 @@
     <form>
         <fieldset>
             <legend>Cajero SENATI</legend>
-            
+
             <label for="retirar">Retirar:</label>
             <input type="number" name="retirar" id="retirar" required><br><br>
 
@@ -21,11 +21,49 @@
             <label for="saldo">Saldo:</label>
             <input type="number" name="saldo" id="saldo" readonly><br><br>
 
-            <button type="button" id="retirar">Retirar</button>
-            <button type="button" id="depositar">Depositar</button>
+            <button type="button" id="opRetirar">Retirar</button>
+            <button type="button" id="opDepositar">Depositar</button>
         </fieldset>
     </form>
     
-    <script></script>
+    <script>
+        let saldo = 500;
+
+        retirarInput = document.getElementById("retirar");
+        depositarInput = document.getElementById("depositar");
+        saldoInput = document.getElementById("saldo");
+
+        retirarBtn = document.getElementById("opRetirar");
+        depositarBtn = document.getElementById("opDepositar");
+
+        function retirar() {
+            let cantidad = parseInt(retirarInput.value);
+
+            if (cantidad > saldo) {
+                alert("No tiene saldo suficiente");
+                return;
+            }
+
+            saldo -= cantidad;
+            actualizarSaldo();
+            alert("Retiro exitoso. Tu saldo actual es: " + saldo);
+
+        }
+
+        function depositar() {
+            let cantidad = parseInt(depositarInput.value);
+
+            saldo += cantidad;
+            actualizarSaldo();
+            alert("Deposito exitoso. Tu saldo actual es: " + saldo);
+        }
+
+        function actualizarSaldo() {
+            saldoInput.value = saldo;
+        }
+
+        retirarBtn.addEventListener("click", retirar);
+        depositarBtn.addEventListener("click", depositar);
+    </script>
 </body>
 </html>
