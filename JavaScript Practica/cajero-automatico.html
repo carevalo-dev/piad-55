@@ -39,8 +39,15 @@
         function retirar() {
             let cantidad = parseInt(retirarInput.value);
 
+            limpiarInput();
+
             if (isNaN(cantidad) || cantidad <= 0) {
                 alert("Por favor ingrese una cantidad válida");
+                return;
+            }
+
+            if (cantidad % 10 != 0) {
+                alert("Por favor ingrese una cantidad múltiplo de 10");
                 return;
             }
 
@@ -53,9 +60,13 @@
             actualizarSaldo();
             alert("Retiro exitoso. Tu saldo actual es: " + saldo);
 
+
         }
 
         function depositar() {
+
+            limpiarInput();
+            
             let cantidad = parseInt(depositarInput.value);
 
             if (isNaN(cantidad) || cantidad <= 0) {
@@ -63,13 +74,24 @@
                 return;
             }
 
+            if (cantidad % 10 != 0) {
+                alert("Por favor ingrese una cantidad múltiplo de 10");
+                return;
+            }
+
             saldo += cantidad;
             actualizarSaldo();
             alert("Deposito exitoso. Tu saldo actual es: " + saldo);
+
         }
 
         function actualizarSaldo() {
             saldoInput.value = saldo;
+        }
+
+        function limpiarInput() {
+            retirarInput.value = "";
+            depositarInput.value = "";
         }
 
         retirarBtn.addEventListener("click", retirar);
